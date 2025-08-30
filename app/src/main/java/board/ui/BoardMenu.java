@@ -32,14 +32,12 @@ public class BoardMenu {
                 System.out.println("3 - Bloquear um card");
                 System.out.println("4 - Desbloquear um card");
                 System.out.println("5 - Cancelar um card");
-
                 System.out.println("6 - Visualizar colunas");
                 System.out.println("7 - Visualizar coluna com cards");
                 System.out.println("8 - Visualizar card");
-
                 System.out.println("9 - Voltar para o menu anterior");
                 System.out.println("10 - Sair");
-
+                option = scanner.nextInt();
                 switch (option) {
                     case 1 -> createCard();
                     case 2 -> moveCardToNextColumn();
@@ -106,7 +104,7 @@ public class BoardMenu {
         System.out.println("Informe o motivo do desbloqueio do card");
         var reason = scanner.next();
         try (var connection = getConnection()) {
-             new CardService(connection).unblock(cardId, reason);
+            new CardService(connection).unblock(cardId, reason);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -152,8 +150,9 @@ public class BoardMenu {
             var column = new BoardColumnQueryService(connection).findByID(selectedColumn);
             column.ifPresent(co -> {
                 System.out.printf("Coluna %s tipo %s\n", co.getName(), co.getKind());
-                co.getCards().forEach(ca -> System.out.printf("Card %s - %s\nDescrição: %s", ca.getId(), ca.getTitle(),
-                        ca.getDescription()));
+                co.getCards()
+                        .forEach(ca -> System.out.printf("Card %s - %s\nDescrição: %s\n", ca.getId(), ca.getTitle(),
+                                ca.getDescription()));
             });
         }
     }

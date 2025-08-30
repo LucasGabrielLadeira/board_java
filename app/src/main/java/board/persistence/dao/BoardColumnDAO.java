@@ -63,7 +63,7 @@ public class BoardColumnDAO {
                 SELECT bc.id,
                        bc.name,
                        bc.kind,
-                       (SELECT COUNT (c.id)
+                       (SELECT COUNT(c.id)
                              FROM CARDS c
                              WHERE c.board_column_id = bc.id
                             ) as cards_amount

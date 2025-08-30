@@ -58,8 +58,8 @@ public class CardDAO {
                 FROM CARDS c
                 LEFT JOIN BLOCKS b
                     ON c.id = b.card_id
-                AND b.unblocked_at IS NOT NULL
-                INNER JOIN BOARDS_BOLUMNS bc
+                AND b.unblocked_at IS NULL
+                INNER JOIN BOARDS_COLUMNS bc
                     ON bc.id = c.board_column_id
                 WHERE c.id = ?;
                 """;
@@ -75,7 +75,7 @@ public class CardDAO {
                         nonNull(resultSet.getString("b.block_reason")),
                         toOffsetDateTime(resultSet.getTimestamp("b.blocked_at")),
                         resultSet.getString("b.block_reason"),
-                        resultSet.getInt("b.block_amount"),
+                        resultSet.getInt("blocks_amount"),
                         resultSet.getLong("c.board_column_id"),
                         resultSet.getString("bc.name"));
                 return Optional.of(dto);

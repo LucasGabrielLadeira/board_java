@@ -27,7 +27,7 @@ public class MainMenu {
         System.out.println("Bem vindo ao gerenciador de boards, escolha a opção desejada");
         var option = -1;
         while (true) {
-            System.out.println("1- Criar um novo board");
+            System.out.println("1 - Criar um novo board");
             System.out.println("2 - Selecionar um board existente");
             System.out.println("3 - Excluir um board");
             System.out.println("4 - Sair");
@@ -89,9 +89,8 @@ public class MainMenu {
             var queryService = new BoardQueryService(connection);
             var optional = queryService.findByID(id);
             optional.ifPresentOrElse(
-                    b -> new boardMenu(b).execute(),
-                    () -> System.out.printf("Não foi encontrado um board com id %s\n", id)
-            );
+                    b -> new BoardMenu(b).execute(),
+                    () -> System.out.printf("Não foi encontrado um board com id %s\n", id));
 
         }
     }

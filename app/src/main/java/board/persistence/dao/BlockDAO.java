@@ -20,10 +20,7 @@ public class BlockDAO {
             statement.setTimestamp(i++, toTimestamp(OffsetDateTime.now()));
             statement.setString(i++, reason);
             statement.setLong(i++, cardID);
-            connection.commit();
-        } catch (SQLException ex) {
-            connection.rollback();
-            throw (ex);
+            statement.executeUpdate();
         }
     }
 
@@ -34,10 +31,7 @@ public class BlockDAO {
             statement.setTimestamp(i++, toTimestamp(OffsetDateTime.now()));
             statement.setString(i++, reason);
             statement.setLong(i++, cardID);
-            connection.commit();
-        } catch (SQLException ex) {
-            connection.rollback();
-            throw (ex);
+            statement.executeUpdate();
         }
     }
 }
